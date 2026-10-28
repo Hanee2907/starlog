@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starlog - Your days, written in the stars</title>
+  <meta name="description" content="A mood journal where every day becomes a star.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Soft coloured clouds of space behind everything -->
+  <div class="nebula" aria-hidden="true"></div>
+
+  <div class="app">
+
+    <!-- Header -->
+    <header class="top">
+      <div class="brand">
+        <img src="favicon.svg" alt="" class="brand-icon">
+        <div>
+          <h1>Starlog</h1>
+          <p class="tagline">Your days, written in the stars</p>
+        </div>
+      </div>
+
+      <div class="month-nav">
+        <button id="prev-month" class="round-btn" aria-label="Previous month">‹</button>
+        <h2 id="month-title">Month</h2>
+        <button id="next-month" class="round-btn" aria-label="Next month">›</button>
+      </div>
+    </header>
+
+    <main class="layout">
+
+      <!-- The night sky -->
+      <section class="sky-card" aria-label="Your mood sky">
+        <canvas id="sky"></canvas>
+
+        <!-- Little popup when you hover a star -->
+        <div id="tip" class="tip hidden"></div>
+
+        <!-- Name of the biggest constellation this month -->
+        <p id="constellation-name" class="constellation-name"></p>
+
+        <!-- Shown when the sky is empty -->
+        <div id="empty" class="empty hidden">
+          <p class="empty-title">Your sky is still dark ✨</p>
+          <p>Write about your day and watch your first star appear.</p>
+          <button id="sample-btn" class="btn btn-ghost">Show me a sample sky</button>
+        </div>
+
+        <!-- Details of a clicked star -->
+        <div id="detail" class="detail hidden">
+          <button id="detail-close" class="detail-close" aria-label="Close">×</button>
+          <p id="detail-date" class="detail-date"></p>
+          <p id="detail-mood" class="detail-mood"></p>
+          <p id="detail-text" class="detail-text"></p>
+          <div class="detail-actions">
+            <button id="detail-edit" class="btn btn-ghost">Edit</button>
+            <button id="detail-delete" class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+
+        <!-- Mood colour key -->
+        <div id="legend" class="legend"></div>
+      </section>
+
+      <!-- Side panel -->
+      <aside class="side">
+
+        <!-- Write today's entry -->
+        <section class="card write">
+          <h3>Tonight's star</h3>
+
+          <label class="field-label" for="entry-date">Day</label>
+          <input type="date" id="entry-date" class="date-input">
+
+          <p class="field-label">How did today feel?</p>
+          <div id="mood-picker" class="mood-picker" role="radiogroup" aria-label="Mood"></div>
+
+          <label class="field-label" for="entry-text">What happened?</label>
+          <textarea id="entry-text" rows="5" maxlength="600"
+            placeholder="Had pizza with #friends and finally finished my #project..."></textarea>
+          <div class="write-footer">
+            <span id="char-count" class="hint">0 / 600 · longer stories make bigger stars</span>
+          </div>
+
+          <p id="form-error" class="form-error"></p>
+          <button id="save-btn" class="btn btn-primary">Place my star ✦</button>
+        </section>
+
+        <!-- Insights -->
+        <section class="card insights">
+          <h3>Your sky in numbers</h3>
+          <div class="stats">
+            <div class="stat">
+              <span class="stat-value" id="stat-month">0</span>
+              <span class="stat-label">stars this month</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value" id="stat-streak">0</span>
+              <span class="stat-label">day writing streak</span>
+            </div>
+          </div>
+
+          <p class="field-label">Mood mix this month</p>
+          <div id="mood-bar" class="mood-bar"></div>
+
+          <ul id="facts" class="facts"></ul>
+        </section>
+
+      </aside>
+    </main>
+
+    <footer class="bottom">
+      <button id="export-btn" class="btn btn-ghost">⤓ Save sky as image</button>
+      <button id="clear-btn" class="btn btn-ghost">Clear all stars</button>
+      <p class="credit">Made with HTML, CSS &amp; JavaScript · Your entries stay in your browser</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
